@@ -10,13 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl
         implements UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
     public User addUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
 }

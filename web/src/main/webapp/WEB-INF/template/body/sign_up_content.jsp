@@ -4,19 +4,26 @@
     <title>Title</title>
 </head>
 <body>
-<form name="f" action="${"/sing_up"}" method="post">
+<form name="f" action="${"/signUp"}" method="post" >
     <fieldset>
         <legend>Your information</legend>
+
         <label for="username">Username</label>
         <input id="username" name="username"/>
+
         <label for="password">Password</label>
         <input type="password" id="password" name="password"/>
-        <label for="confirm_password">Confirm password</label>
-        <input type="password" id="confirm_password" name="confirm_password"/>
+
+        <label for="confirmPassword">Confirm password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword"/>
+
         <label for="email" >Email</label>
         <input type="email" id="email" name="email"/>
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
         <div class="form-actions">
-            <button class="btn">Log in</button>
+            <button class="btn">Register</button>
         </div>
     </fieldset>
 </form>

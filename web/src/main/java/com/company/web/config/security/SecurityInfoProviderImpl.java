@@ -20,7 +20,7 @@ public class SecurityInfoProviderImpl
     @Autowired
     UserRepository userRepository;
 
-    User overridenCurrentUser;
+    private User overridenCurrentUser;
 
     @Override
     public User getCurrentUser() {
@@ -33,7 +33,7 @@ public class SecurityInfoProviderImpl
         return user;
     }
 
-    public String getUsername() {
+    private String getUsername() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         if (authentication == null)
