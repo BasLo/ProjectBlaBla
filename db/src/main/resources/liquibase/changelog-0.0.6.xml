@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="add reference between user and role" author="bas">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_role_id_with_user_id"
+                                            foreignKeyTableName="user"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="role"
+                                 baseColumnNames="id"
+                                 constraintName="fk_role_id_with_user_id"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+
+    </changeSet>
+
+</databaseChangeLog>
