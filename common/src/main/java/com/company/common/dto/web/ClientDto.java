@@ -1,12 +1,39 @@
 package com.company.common.dto.web;
 
+import com.company.common.annotations.validate.EmailValid;
+import com.company.common.annotations.validate.PasswordMatches;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@PasswordMatches
 public class ClientDto {
 
+    @NotNull
+    @NotEmpty
+    @EmailValid
     private String email;
+
+    @NotNull
+    @NotEmpty
     private String username;
+
+    @NotNull
+    @NotEmpty
     private String password;
 
-    private String confirmPassword;
+    @NotNull
+    @Size(min = 1)
+    private String matchingPassword;
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
 
     public String getEmail() {
         return email;
@@ -32,11 +59,4 @@ public class ClientDto {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }

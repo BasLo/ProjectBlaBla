@@ -26,7 +26,7 @@ public abstract class JpaSettings {
     public String HBM2DDL_AUTO;
 
     @Value("${hibernate.isolation.transactions}")
-    public String ISOLATION_TYPE;
+    public String ISOLATION;
 
     //Data source properties
     @Value("${database.driverClassname}")
@@ -68,7 +68,7 @@ public abstract class JpaSettings {
         jpaProperties.put(Environment.SHOW_SQL, SHOW_SQL);
         jpaProperties.put(Environment.FORMAT_SQL, FORMAT_SQL);
         jpaProperties.put(Environment.HBM2DDL_AUTO, HBM2DDL_AUTO);
-        jpaProperties.put(Environment.ISOLATION, ISOLATION_TYPE);
+        jpaProperties.put(Environment.ISOLATION, ISOLATION);
 
         return jpaProperties;
     }

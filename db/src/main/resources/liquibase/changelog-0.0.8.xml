@@ -7,20 +7,20 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <changeSet id="add reference between role and user" author="bas">
+    <changeSet id="add reference between verification token and user" author="bas">
         <preConditions onFail="MARK_RAN">
             <not>
-                <foreignKeyConstraintExists foreignKeyName="ROLE_WITH_USER_ID"
-                                            foreignKeyTableName="role"/>
+                <foreignKeyConstraintExists foreignKeyName="VERIFICATION_TOKEN_WITH_USER_ID"
+                                            foreignKeyTableName="user"/>
             </not>
         </preConditions>
 
-        <addForeignKeyConstraint constraintName="ROLE_WITH_USER_ID"
+        <addForeignKeyConstraint constraintName="VERIFICATION_TOKEN_WITH_USER_ID"
                                  baseTableName="user"
-                                 baseColumnNames="role_id"
+                                 baseColumnNames="verification_token_id"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="role"
+                                 referencedTableName="verificationToken"
                                  referencedColumnNames="id"/>
     </changeSet>
 

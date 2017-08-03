@@ -1,5 +1,6 @@
 package com.company.domain.entity.user;
 
+import com.company.domain.entity.VerificationToken;
 import com.company.domain.entity.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
@@ -7,10 +8,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
@@ -40,10 +38,15 @@ public class UserDetailsImpl
     @Column(name = "updated_on")
     private Date updatedOn = new Date();
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "ROLE_WITH_USER_ID"))
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    @JsonIgnore
     private Role role;
+
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "verification_token_id", nullable = false, foreignKey = @ForeignKey(name = "VERIFICATION_TOKEN_WITH_USER_ID"))
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private VerificationToken verificationToken;
 
     @Override
     public String getUsername() {
@@ -123,4 +126,12 @@ public class UserDetailsImpl
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+  /*  public VerificationToken getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(VerificationToken verificationToken) {
+        this.verificationToken = verificationToken;
+    }*/
 }

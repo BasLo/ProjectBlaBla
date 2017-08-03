@@ -15,6 +15,7 @@ import java.util.Date;
 @Component
 public class User extends
         UserDetailsImpl {
+
     private static final long serialVersionUID = 3683990149362108908L;
 
     @Version

@@ -41,10 +41,12 @@
             <column name="creation_on" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="updated_on" type="datetime">
+            <column name="updated_on" type="datetime" />
+            <column name="last_sign_in" type="datetime" />
+            <column name="role_id" type="bigint(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_sign_in" type="datetime">
+            <column name="verification_token_id" type="bigint(20)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

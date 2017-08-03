@@ -21,16 +21,16 @@ public class SecurityConfig
         extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    SimpleUrlAuthenticationSuccessHandler loginSuccessHandler;
+    private SimpleUrlAuthenticationSuccessHandler loginSuccessHandler;
 
     @Autowired
-    SimpleUrlAuthenticationFailureHandler loginFailureHandler;
+    private SimpleUrlAuthenticationFailureHandler loginFailureHandler;
 
     @Autowired
-    AjaxAwareAuthenticationEntryPoint ajaxAwareAuthenticationEntryPoint;
+    private AjaxAwareAuthenticationEntryPoint ajaxAwareAuthenticationEntryPoint;
 
     @Autowired
     private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;

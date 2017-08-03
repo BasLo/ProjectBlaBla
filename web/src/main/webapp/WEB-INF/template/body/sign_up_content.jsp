@@ -14,8 +14,8 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password"/>
 
-        <label for="confirmPassword">Confirm password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword"/>
+        <label for="matchingPassword">Confirm password</label>
+        <input type="password" id="matchingPassword" name="matchingPassword"/>
 
         <label for="email" >Email</label>
         <input type="email" id="email" name="email"/>
