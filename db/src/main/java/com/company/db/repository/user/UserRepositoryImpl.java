@@ -13,14 +13,14 @@ public class UserRepositoryImpl
         extends SimpleJpaRepository<User, Long>
         implements UserRepository {
 
-    @Autowired
-    public UserRepositoryImpl(@Qualifier("userClass") Class<User> domainClass, EntityManager em) {
-        super(domainClass, em);
-    }
-
     @Override
     public User findByUsername(String username) {
         return null;
+    }
+
+    @Autowired
+    public UserRepositoryImpl(@Qualifier("userClass") Class<User> domainClass, EntityManager em) {
+        super(domainClass, em);
     }
 
 }

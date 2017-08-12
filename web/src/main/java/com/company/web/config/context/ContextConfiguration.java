@@ -1,10 +1,7 @@
 package com.company.web.config.context;
 
 import liquibase.integration.spring.SpringLiquibase;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -14,13 +11,11 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "com.company.common.**",
         "com.company.web.config.**",
-        "com.company.db.**"
 })
 @PropertySource({
         "classpath:/jdbc.properties",
         "classpath:jpa/jpa.properties"
 })
-//@Import(RepositoryDefinitions.class)
 public class ContextConfiguration
         extends JpaSettings {
 
@@ -42,7 +37,7 @@ public class ContextConfiguration
 
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
-                "com.company.domain.entity",
+                "com.company.domain.entity.*",
                 "com.company.domain.entity.**"
         );
         sessionFactory.setHibernateProperties(jpaProperties());

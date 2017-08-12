@@ -1,37 +1,27 @@
 package com.company.domain.entity.parent;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.domain.Persistable;
 import org.springframework.util.ClassUtils;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.UUID;
 
 @MappedSuperclass
-public abstract class AbstractPersistableGenerationUUID<PK extends Serializable>
-        implements Persistable<PK> {
+public abstract class AbstractVersionPersistableGenerationUUID
+        implements Persistable<UUID> {
     private static final long serialVersionUID = 4850642056072900789L;
 
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
+    @Type(type = "org.hibernate.type.UUIDBinaryType")
     @Id
-    @GeneratedValue(generator = "uuid", strategy = GenerationType.AUTO)
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id")
-    private PK id;
+    private UUID id;
 
     @Version
     private Long version;
-
-    public AbstractPersistableGenerationUUID() {
-    }
-
-    @Override
-    public PK getId() {
-        return this.id;
-    }
-
-    public void setId(PK pk) {
-        this.id = pk;
-    }
 
     public Long getVersion() {
         return version;
@@ -39,6 +29,14 @@ public abstract class AbstractPersistableGenerationUUID<PK extends Serializable>
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+    @Override
+    public UUID getId() {
+        return this.id;
+    }
+
+    public void setId(UUID pk) {
+        this.id = pk;
     }
 
     @Transient
@@ -55,7 +53,7 @@ public abstract class AbstractPersistableGenerationUUID<PK extends Serializable>
             return false;
         } else {
             try {
-                AbstractPersistableGenerationUUID<PK> that = (AbstractPersistableGenerationUUID<PK>) obj;
+                AbstractVersionPersistableGenerationUUID that = (AbstractVersionPersistableGenerationUUID) obj;
                 return null != this.getId() && this.getId().equals(that.getId());
             } catch (ClassCastException e) {
                 return false;
@@ -69,6 +67,6 @@ public abstract class AbstractPersistableGenerationUUID<PK extends Serializable>
     }
 
     public String toString() {
-        return String.format("Entity of type %s with id: %s", this.getClass().getName(), this.getId());
+         return String.format("Entity of type %s with id: %s", this.getClass().getName(), this.getId());
     }
 }

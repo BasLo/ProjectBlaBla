@@ -36,8 +36,8 @@ public class JpaConfig
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPersistenceUnitName("com.company.domain.entity");
-        entityManagerFactoryBean.setPackagesToScan("com.company.domain.entity");
+        entityManagerFactoryBean.setPersistenceUnitName("com.company.domain.entity.**");
+        entityManagerFactoryBean.setPackagesToScan("com.company.domain.entity.**");
         entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter());
         entityManagerFactoryBean.setJpaDialect(hibernateJpaDialect());
         entityManagerFactoryBean.setJpaProperties(jpaProperties());
@@ -47,7 +47,7 @@ public class JpaConfig
     }
 
     @Bean
-    public JpaTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
 
         jpaTransactionManager.setEntityManagerFactory(emf);
@@ -60,10 +60,5 @@ public class JpaConfig
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-  /*  @Bean
-    public EntityManager entityManager() {
-        return entityManagerFactory().getObject().RepositoryDefinitionscreateEntityManager();
-    }*/
 
 }

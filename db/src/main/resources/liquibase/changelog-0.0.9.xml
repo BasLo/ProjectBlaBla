@@ -6,18 +6,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="add hibernate_sequence" author="bas">
+    <changeSet id="add value to hibernate_sequence" author="bas">
         <preConditions onFail="MARK_RAN">
-            <dbms type="MySQL, HSQSL"/>
+            <dbms type="MySQL, HSQSL, PostgreSQL"/>
             <not>
-                <tableExists tableName="hibernate_sequence"/>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) FROM sitelocal.hibernate_sequence</sqlCheck>
             </not>
         </preConditions>
-
-        <createTable tableName="hibernate_sequence">
-            <column name="next_val" type="bigint(20)">
-            </column>
-        </createTable>
+        <!--TODO какого то лешего не работает! -->
+        <sql dbms="MySQL" >INSERT INTO sitelocal.hibernate_sequence(next_val) VALUES (0)</sql>
 
     </changeSet>
 

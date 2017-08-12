@@ -16,11 +16,11 @@
         </preConditions>
 
         <addForeignKeyConstraint constraintName="VERIFICATION_TOKEN_WITH_USER_ID"
-                                 baseTableName="user"
-                                 baseColumnNames="verification_token_id"
+                                 baseTableName="verificationToken"
+                                 baseColumnNames="user_id"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="verificationToken"
+                                 referencedTableName="user"
                                  referencedColumnNames="id"/>
     </changeSet>
 

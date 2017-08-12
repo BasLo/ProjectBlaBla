@@ -2,7 +2,6 @@ package com.company.domain.entity.user;
 
 import com.sun.istack.internal.NotNull;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.annotation.Version;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
@@ -18,19 +17,15 @@ public class User extends
 
     private static final long serialVersionUID = 3683990149362108908L;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
     @NotNull
     @Column(unique = true, name = "email_address")
     private String emailAddress;
 
-    @Transient
-    private String normalPassword;
-
     @Column(name = "last_sign_in")
     private Date lastSignIn;
+
+    @Transient
+    private String normalPassword;
 
     public String getEmailAddress() {
         return emailAddress;

@@ -1,5 +1,6 @@
 package com.company.domain.entity.role;
 
+import com.company.domain.entity.parent.AbstractVersionPersistable;
 import com.company.domain.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
@@ -17,18 +18,14 @@ import java.util.List;
 @Scope("prototype")
 @Component
 public class Role
-        extends AbstractPersistable<Long> {
+        extends AbstractVersionPersistable<Long>{
 
     public static final String AUTHORITY_ADMIN = "AUTHORITY_ADMIN";
     public static final String AUTHORITY_USER = "AUTHORITY_USER";
 
     private static final long serialVersionUID = 3604069725181454250L;
 
-    @Version
-    @Column(name = "version")
-    private Long version;
-
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     private User user;
 
     @Column(name = "role")

@@ -44,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>db</groupId>
+            <artifactId>db</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>web</groupId>
             <artifactId>web</artifactId>
             <scope>test</scope>

@@ -13,19 +13,11 @@
 </head>
 <body>
 
+<a href="<c:url value="/test"/>" >bla</a>
 <tiles:insertAttribute name="navigation_bar"/>
-<div></div>
-<div id="header">
-    <tiles:insertAttribute name="header"/>
-</div>
-<div></div>
-<div id="page">
-    <tiles:insertAttribute name="content"/>
-</div>
-<div></div>
-<div id="footer_wrapper">
-    <tiles:insertAttribute name="footer"/>
-</div>
+<tiles:insertAttribute name="header"/>
+<tiles:insertAttribute name="content"/>
+<tiles:insertAttribute name="footer"/>
 
 </body>
 </html>

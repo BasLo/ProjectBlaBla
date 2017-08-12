@@ -1,18 +1,19 @@
 package com.company.domain.entity;
 
+import com.company.domain.entity.parent.AbstractVersionPersistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity(name = "news")
 public class News
-        extends AbstractPersistable<Long> {
+        extends AbstractVersionPersistable<Long> {
 
     private static final long serialVersionUID = -7397483409793611918L;
+
     @Column(name = "date")
     private Date date;
 

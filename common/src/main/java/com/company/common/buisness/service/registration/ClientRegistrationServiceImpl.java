@@ -1,6 +1,7 @@
 package com.company.common.buisness.service.registration;
 
 import com.company.common.dto.web.ClientDto;
+import com.company.domain.entity.VerificationToken;
 import com.company.domain.entity.role.Role;
 import com.company.domain.entity.user.User;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class ClientRegistrationServiceImpl
         user.setRole(Role.createUserRole(user));
         user.setUpdatedOn(new Date());
         user.setPassword("awda");
+        user.setVerificationToken(new VerificationToken("awfaf", user));
         return userService.addUser(user);
     }
 

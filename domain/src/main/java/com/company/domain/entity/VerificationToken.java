@@ -15,8 +15,10 @@ import java.util.Date;
 public class VerificationToken
         extends AbstractPersistable<Long>{
 
+    private static final long serialVersionUID = -5010077390892174629L;
+
     private static final int EXPIRATION = 60 * 24; // TODO: move it to entity objects.
-    
+
     @Version
     @Column(name = "version")
     private Long version;
@@ -27,7 +29,7 @@ public class VerificationToken
     @Column(name = "expireDate")
     private Date expireDate;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY) //TODO: one side relationships;
     private User user;
 
     public VerificationToken(){

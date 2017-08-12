@@ -29,7 +29,7 @@ public class ClientSignUpController {
     public ModelAndView singUp(@ModelAttribute("clientDto") @NotNull ClientDto clientDto,
                                BindingResult bindingResult, ModelAndView modelAndView){
         if (!bindingResult.hasErrors()) {
-//            clientRegistrationService.addUserByRegistrationForm(clientDto);
+            clientRegistrationService.addUserByRegistrationForm(clientDto);
         }else {
             //TODO: something wrong!
         }

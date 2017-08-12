@@ -16,11 +16,11 @@
         </preConditions>
 
         <addForeignKeyConstraint constraintName="ROLE_WITH_USER_ID"
-                                 baseTableName="user"
-                                 baseColumnNames="role_id"
+                                 baseTableName="role"
+                                 baseColumnNames="user_id"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="role"
+                                 referencedTableName="user"
                                  referencedColumnNames="id"/>
     </changeSet>
 

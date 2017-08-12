@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 public abstract class AbstractClientRegistrationService
         implements ClientRegistrationService{
 
-    protected UserRepository userRepository;
+    UserRepository userRepository;
 
-    protected UserService userService;
+    UserService userService;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -23,11 +23,4 @@ public abstract class AbstractClientRegistrationService
         this.userService = userService;
     }
 
-    public UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
 }

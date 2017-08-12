@@ -28,20 +28,23 @@ public abstract class JpaSettings {
     @Value("${hibernate.isolation.transactions}")
     public String ISOLATION;
 
+    @Value("${hibernate.id.new_generator_mappings}")
+    public String USE_NEW_ID_GENERATOR_MAPPINGS;
+
     //Data source properties
-    @Value("${database.driverClassname}")
+    @Value("${datasource.driver-class-name}")
     public String DATABASE_DRIVER_CLASSNAME;
 
-    @Value("${database.url}")
+    @Value("${datasource.url}")
     public String DATABASE_URL;
 
-    @Value("${database.username}")
+    @Value("${datasource.username}")
     public String DATABASE_USERNAME;
 
-    @Value("${database.password}")
+    @Value("${datasource.password}")
     public String DATABASE_PASSWORD;
 
-    @Value("${database.database.name}")
+    @Value("${datasource.datasource-name}")
     public String DATABASE_TYPE;
 
     @Bean
@@ -69,6 +72,7 @@ public abstract class JpaSettings {
         jpaProperties.put(Environment.FORMAT_SQL, FORMAT_SQL);
         jpaProperties.put(Environment.HBM2DDL_AUTO, HBM2DDL_AUTO);
         jpaProperties.put(Environment.ISOLATION, ISOLATION);
+        jpaProperties.put(Environment.USE_NEW_ID_GENERATOR_MAPPINGS, USE_NEW_ID_GENERATOR_MAPPINGS);
 
         return jpaProperties;
     }

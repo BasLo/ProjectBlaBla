@@ -1,6 +1,7 @@
 package com.company.domain.entity.user;
 
 import com.company.domain.entity.VerificationToken;
+import com.company.domain.entity.parent.AbstractVersionPersistable;
 import com.company.domain.entity.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
@@ -14,7 +15,7 @@ import java.util.Date;
 
 @MappedSuperclass
 public class UserDetailsImpl
-        extends AbstractPersistable<Long>
+        extends AbstractVersionPersistable<Long>
         implements UserDetails {
 
     private static final long serialVersionUID = -2199293542485135937L;
@@ -38,13 +39,15 @@ public class UserDetailsImpl
     @Column(name = "updated_on")
     private Date updatedOn = new Date();
 
-    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "ROLE_WITH_USER_ID"))
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "ROLE_WITH_USER_ID"),
+            referencedColumnName = "role_id")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private Role role;
 
-    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "verification_token_id", nullable = false, foreignKey = @ForeignKey(name = "VERIFICATION_TOKEN_WITH_USER_ID"))
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "verification_token_id", nullable = false, foreignKey = @ForeignKey(name = "VERIFICATION_TOKEN_WITH_USER_ID"),
+            referencedColumnName = "verification_token_id")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private VerificationToken verificationToken;
 
@@ -127,11 +130,11 @@ public class UserDetailsImpl
         this.updatedOn = updatedOn;
     }
 
-  /*  public VerificationToken getVerificationToken() {
+    public VerificationToken getVerificationToken() {
         return verificationToken;
     }
 
     public void setVerificationToken(VerificationToken verificationToken) {
         this.verificationToken = verificationToken;
-    }*/
+    }
 }
