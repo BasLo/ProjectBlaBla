@@ -1,9 +1,10 @@
 package com.company.common.buisness.service.registration;
 
-import com.company.common.dto.web.ClientDto;
+import com.company.common.dto.web.UserDto;
 import com.company.domain.entity.user.User;
+import org.springframework.validation.BindingResult;
 
 public interface ClientRegistrationService {
 
-     User addUserByRegistrationForm(ClientDto clientDto);
+     User addUserByRegistrationForm(UserDto userDto, BindingResult bindingResult);
 }

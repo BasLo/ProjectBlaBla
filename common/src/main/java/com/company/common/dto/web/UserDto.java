@@ -2,13 +2,15 @@ package com.company.common.dto.web;
 
 import com.company.common.annotations.validate.EmailValid;
 import com.company.common.annotations.validate.PasswordMatches;
+import com.company.domain.entity.user.MainUserInformation;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @PasswordMatches
-public class ClientDto {
+public class UserDto
+        implements MainUserInformation {
 
     @NotNull
     @NotEmpty
@@ -51,6 +53,11 @@ public class ClientDto {
         this.username = username;
     }
 
+    @Override
+    public String getEmailAddress() {
+        return this.email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -59,4 +66,8 @@ public class ClientDto {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "New user account info. \n Email:" + this.email + ", \n Username: " + this.username;
+    }
 }

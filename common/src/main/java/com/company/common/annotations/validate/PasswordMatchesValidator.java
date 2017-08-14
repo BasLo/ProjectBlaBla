@@ -1,6 +1,6 @@
 package com.company.common.annotations.validate;
 
-import com.company.common.dto.web.ClientDto;
+import com.company.common.dto.web.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -17,7 +17,7 @@ public class PasswordMatchesValidator
     public boolean isValid(final Object obj, final ConstraintValidatorContext context) {
         boolean isValid;
         try {
-            ClientDto user = (ClientDto) obj;
+            UserDto user = (UserDto) obj;
             isValid = user.getPassword().equals(user.getMatchingPassword());
         }catch (Exception e){
             isValid = false;

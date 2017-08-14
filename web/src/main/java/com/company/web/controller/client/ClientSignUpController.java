@@ -1,20 +1,24 @@
 package com.company.web.controller.client;
 
 import com.company.common.buisness.service.registration.ClientRegistrationService;
-import com.company.common.dto.web.ClientDto;
+import com.company.common.dto.web.UserDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
 public class ClientSignUpController {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     private ClientRegistrationService clientRegistrationService;
 
@@ -26,10 +30,12 @@ public class ClientSignUpController {
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public ModelAndView singUp(@ModelAttribute("clientDto") @NotNull ClientDto clientDto,
+    public ModelAndView singUp(@Valid @NotNull final UserDto userDto,
                                BindingResult bindingResult, ModelAndView modelAndView){
+        LOGGER.debug("Registering user account with information: {}", userDto);
+
         if (!bindingResult.hasErrors()) {
-            clientRegistrationService.addUserByRegistrationForm(clientDto);
+            clientRegistrationService.addUserByRegistrationForm(userDto, bindingResult);
         }else {
             //TODO: something wrong!
         }

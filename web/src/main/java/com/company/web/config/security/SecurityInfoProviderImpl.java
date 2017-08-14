@@ -27,9 +27,14 @@ public class SecurityInfoProviderImpl
         if (overridenCurrentUser != null) {
             return overridenCurrentUser;
         }
-        User user = userRepository.findByUsername(getUsername());
+        User user = null;
+        try {
+            user = userRepository.findByUsername(getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();//TODO fix it
+        }
         if (user == null)
-            return user; //TODO
+            return user; //TODO fix it
         return user;
     }
 

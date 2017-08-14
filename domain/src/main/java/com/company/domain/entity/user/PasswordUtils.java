@@ -2,7 +2,7 @@ package com.company.domain.entity.user;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class Password {
+public class PasswordUtils {
 
     public static String getEncryptedPassword(String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

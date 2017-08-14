@@ -2,16 +2,15 @@ package com.company.domain.entity.role;
 
 import com.company.domain.entity.parent.AbstractVersionPersistable;
 import com.company.domain.entity.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.annotation.Version;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity(name = "role")

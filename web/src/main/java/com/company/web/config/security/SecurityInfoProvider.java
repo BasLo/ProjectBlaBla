@@ -4,14 +4,14 @@ import com.company.domain.entity.user.User;
 
 public interface SecurityInfoProvider {
     /**
-     * Method to Get Current User
+     * Method to Get Current MainUser
      *
-     * @return User
+     * @return MainUser
      */
     User getCurrentUser();
 
     /**
-     * Method to get Authenticate User
+     * Method to get Authenticate MainUser
      *
      * @param user
      */

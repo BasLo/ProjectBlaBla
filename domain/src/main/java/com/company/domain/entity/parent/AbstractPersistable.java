@@ -1,6 +1,5 @@
 package com.company.domain.entity.parent;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 import org.springframework.util.ClassUtils;
 

@@ -3,9 +3,8 @@ package com.company.domain.entity.user;
 import com.company.domain.entity.VerificationToken;
 import com.company.domain.entity.parent.AbstractVersionPersistable;
 import com.company.domain.entity.role.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.internal.NotNull;
 import org.hibernate.annotations.Cascade;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,14 +15,19 @@ import java.util.Date;
 @MappedSuperclass
 public class UserDetailsImpl
         extends AbstractVersionPersistable<Long>
-        implements UserDetails {
+        implements UserDetails, MainUserInformation {
 
     private static final long serialVersionUID = -2199293542485135937L;
 
+    @NotNull
     @Column(unique = true, name = "username")
     private String username;
 
-    @JsonIgnore
+    @NotNull
+    @Column(unique = true, name = "email_address")
+    private String emailAddress;
+
+    @NotNull
     @Column(name = "password")
     private String password;
 
@@ -33,11 +37,15 @@ public class UserDetailsImpl
     @Column(name = "locked")
     private boolean locked = true;
 
+    @NotNull
     @Column(name = "creation_on")
     private Date creationOn = new Date();
 
     @Column(name = "updated_on")
     private Date updatedOn = new Date();
+
+    @Column(name = "last_sign_in")
+    private Date lastSignIn;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "ROLE_WITH_USER_ID"),
@@ -137,4 +145,22 @@ public class UserDetailsImpl
     public void setVerificationToken(VerificationToken verificationToken) {
         this.verificationToken = verificationToken;
     }
+
+    @Override
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public Date getLastSignIn() {
+        return lastSignIn;
+    }
+
+    public void setLastSignIn(Date lastSignIn) {
+        this.lastSignIn = lastSignIn;
+    }
+
 }
