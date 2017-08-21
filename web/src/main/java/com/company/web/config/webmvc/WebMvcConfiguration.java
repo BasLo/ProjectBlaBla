@@ -5,10 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
@@ -34,7 +38,7 @@ public class WebMvcConfiguration
 
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/views/");
@@ -45,8 +49,15 @@ public class WebMvcConfiguration
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
+        final WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
         webContentInterceptor.setCacheSeconds(0);
         registry.addInterceptor(webContentInterceptor);
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        final CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+        cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
+        return cookieLocaleResolver;
     }
 }

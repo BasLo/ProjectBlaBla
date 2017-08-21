@@ -6,10 +6,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="classpath:/liquibase/changelog-0.0.4.xml"/>
-    <include file="classpath:/liquibase/changelog-0.0.5.xml"/>
-    <include file="classpath:/liquibase/changelog-0.0.6.xml"/>
-    <include file="classpath:/liquibase/changelog-0.0.7.xml"/>
-    <include file="classpath:/liquibase/changelog-0.0.8.xml"/>
+    <include file="classpath:/liquibase/changelog-user_table.xml"/>
+    <include file="classpath:/liquibase/changelog-role_table.xml"/>
+    <include file="classpath:/liquibase/changelog-privilege_table.xml"/>
+    <include file="classpath:/liquibase/changelog-verification_token_table.xml"/>
+    <include file="classpath:/liquibase/changelog-FK_user_id_role_user_id.xml"/>
+    <include file="classpath:/liquibase/changelog-FK_user_id_verificationtoken_user_idr.xml"/>
+    <include file="classpath:/liquibase/changelog-JT_privilege_to_role.xml"/>
 
 </databaseChangeLog>

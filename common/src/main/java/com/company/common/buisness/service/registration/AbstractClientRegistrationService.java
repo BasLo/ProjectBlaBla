@@ -1,5 +1,6 @@
 package com.company.common.buisness.service.registration;
 
+import com.company.common.buisness.service.token.VerificationTokenService;
 import com.company.common.buisness.service.user.UserService;
 import com.company.common.exceptions.validate.EmailExistsException;
 import com.company.common.exceptions.validate.UsernameExistsException;
@@ -11,6 +12,8 @@ import com.company.domain.entity.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -21,9 +24,15 @@ public abstract class AbstractClientRegistrationService
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    ApplicationEventPublisher eventPublisher;
 
     UserService userService;
+
+    MessageSource messageSource;
+
+    VerificationTokenService tokenService;
 
     protected User createUserBlank(final MainUserInformation userInformation)
             throws EmailExistsException, UsernameExistsException{
@@ -40,7 +49,6 @@ public abstract class AbstractClientRegistrationService
         registered.setPassword(password);
         registered.setCreationOn(new Date());
         registered.setRole(Role.createUserRole(registered));
-        registered.setEnabled(false);
         return registered;
     }
 
@@ -66,4 +74,18 @@ public abstract class AbstractClientRegistrationService
         this.userService = userService;
     }
 
+    @Autowired
+    public void setEventPublisher(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
+
+    @Autowired
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    @Autowired
+    public void setTokenService(VerificationTokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 }

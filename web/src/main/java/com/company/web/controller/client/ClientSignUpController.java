@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -20,7 +22,7 @@ public class ClientSignUpController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    private ClientRegistrationService clientRegistrationService;
+    private ClientRegistrationService registrationService;
 
     @RequestMapping(value = "/signUpView", method = RequestMethod.GET)
     public ModelAndView signUpView(ModelAndView modelAndView){
@@ -31,20 +33,26 @@ public class ClientSignUpController {
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public ModelAndView singUp(@Valid @NotNull final UserDto userDto,
-                               BindingResult bindingResult, ModelAndView modelAndView){
+                               BindingResult bindingResult, ModelAndView modelAndView, WebRequest request){
         LOGGER.debug("Registering user account with information: {}", userDto);
 
         if (!bindingResult.hasErrors()) {
-            clientRegistrationService.addUserByRegistrationForm(userDto, bindingResult);
+            registrationService.addUserByRegistrationForm(userDto, bindingResult, request);
         }else {
             //TODO: something wrong!
         }
         return modelAndView;
     }
 
+    @RequestMapping(value = "/mailRegistrationConfirm", method = RequestMethod.GET)
+    public String confirmEmailRegistration(WebRequest request, @RequestParam("token") String token, ModelAndView modelAndView){
+        return registrationService.processEmailRegistrationConfirm(token, request,modelAndView );
+    }
+
     @Autowired
     @Qualifier("clientRegistrationServiceImpl")
-    public void setClientRegistrationService(ClientRegistrationService clientRegistrationService) {
-        this.clientRegistrationService = clientRegistrationService;
+    public void setRegistrationService(ClientRegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
+
 }

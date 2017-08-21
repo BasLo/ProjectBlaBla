@@ -1,17 +1,13 @@
 package com.company.domain.entity;
 
 import com.company.domain.entity.user.User;
-import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
-@Entity(name = "verificationToken")
-@Scope("prototype")
-@Component
+@Entity(name = "verificationtoken")
 public class VerificationToken
         extends AbstractPersistable<Long>{
 
@@ -29,7 +25,7 @@ public class VerificationToken
     @Column(name = "expireDate")
     private Date expireDate;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY) //TODO: one side relationships;
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     private User user;
 
     public VerificationToken(){

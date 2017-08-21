@@ -9,11 +9,11 @@
     <changeSet id="add verification token" author="bas">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="verificationToken"/>
+                <tableExists tableName="verificationtoken"/>
             </not>
         </preConditions>
 
-        <createTable tableName="verificationToken">
+        <createTable tableName="verificationtoken">
             <column name="id" type="bigint(20)" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

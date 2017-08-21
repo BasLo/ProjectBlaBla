@@ -7,15 +7,15 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <changeSet id="add reference between role and user" author="bas">
+    <changeSet id="add FK role and user" author="bas">
         <preConditions onFail="MARK_RAN">
             <not>
-                <foreignKeyConstraintExists foreignKeyName="ROLE_WITH_USER_ID"
+                <foreignKeyConstraintExists foreignKeyName="FK_user_id_role_user_id"
                                             foreignKeyTableName="role"/>
             </not>
         </preConditions>
 
-        <addForeignKeyConstraint constraintName="ROLE_WITH_USER_ID"
+        <addForeignKeyConstraint constraintName="FK_user_id_role_user_id"
                                  baseTableName="role"
                                  baseColumnNames="user_id"
                                  onDelete="CASCADE"

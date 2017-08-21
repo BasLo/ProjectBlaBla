@@ -10,13 +10,13 @@
     <changeSet id="add reference between verification token and user" author="bas">
         <preConditions onFail="MARK_RAN">
             <not>
-                <foreignKeyConstraintExists foreignKeyName="VERIFICATION_TOKEN_WITH_USER_ID"
-                                            foreignKeyTableName="user"/>
+                <foreignKeyConstraintExists foreignKeyName="FK_user_id_verificationtoken_user_id"
+                                            foreignKeyTableName="verificationtoken"/>
             </not>
         </preConditions>
 
-        <addForeignKeyConstraint constraintName="VERIFICATION_TOKEN_WITH_USER_ID"
-                                 baseTableName="verificationToken"
+        <addForeignKeyConstraint constraintName="FK_user_id_verificationtoken_user_id"
+                                 baseTableName="verificationtoken"
                                  baseColumnNames="user_id"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"

@@ -17,7 +17,8 @@ import javax.annotation.PostConstruct;
 })
 @PropertySource({
         "classpath:/jdbc.properties",
-        "classpath:jpa/jpa.properties"
+        "classpath:jpa/jpa.properties",
+        "classpath:/emailsender.properties"
 })
 public class ContextConfiguration
         extends JpaSettings {
@@ -54,4 +55,5 @@ public class ContextConfiguration
         multipartResolver.setMaxUploadSize(10000);
         return multipartResolver;
     }
+
 }

@@ -21,10 +21,10 @@ public class UserServiceImpl
     @Override
     @Transactional(rollbackFor = {Exception.class})
     @Nullable
-    public User registerNewUserAccount(User user) {
+    public User saveUser(User user) {
         User registered ;
         try{
-            registered = userRepository.saveAndFlush(user);
+            registered = userRepository.save(user);
         } catch (Exception e){
             LOGGER.error("Exception {} \n created User with data: {}", e.getMessage(), user);
             return null;

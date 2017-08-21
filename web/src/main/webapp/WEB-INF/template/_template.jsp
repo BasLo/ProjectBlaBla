@@ -13,7 +13,6 @@
 </head>
 <body>
 
-<a href="<c:url value="/test"/>" >bla</a>
 <tiles:insertAttribute name="navigation_bar"/>
 <tiles:insertAttribute name="header"/>
 <tiles:insertAttribute name="content"/>

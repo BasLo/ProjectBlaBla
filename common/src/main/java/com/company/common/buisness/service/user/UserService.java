@@ -4,5 +4,5 @@ import com.company.domain.entity.user.User;
 
 public interface UserService {
 
-    User registerNewUserAccount(User user);
+    User saveUser(User user);
 }

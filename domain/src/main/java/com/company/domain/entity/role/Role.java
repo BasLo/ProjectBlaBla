@@ -1,21 +1,16 @@
 package com.company.domain.entity.role;
 
+import com.company.domain.entity.Privilege;
 import com.company.domain.entity.parent.AbstractVersionPersistable;
 import com.company.domain.entity.user.User;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "role")
-@Scope("prototype")
-@Component
 public class Role
         extends AbstractVersionPersistable<Long>{
 
@@ -24,17 +19,25 @@ public class Role
 
     private static final long serialVersionUID = 3604069725181454250L;
 
+    @Column(name = "role")
+    private Integer role;
+
     @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     private User user;
 
-    @Column(name = "role")
-    private Integer role;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinTable(name = "jt_privilege_role",
+            joinColumns = @JoinColumn(name = "roleid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "privilegeid", referencedColumnName = "id"))
+    private Collection<Privilege> privileges;
 
     public Role() {
         super();
     }
 
     public Role(User user, Roles role) {
+        super();
+
         this.user = user;
         this.role = role.getRoleId();
     }
@@ -72,5 +75,13 @@ public class Role
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public Collection<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Collection<Privilege> privileges) {
+        this.privileges = privileges;
     }
 }

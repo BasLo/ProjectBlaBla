@@ -1,9 +1,3 @@
-<%--
-  User: zhurov
-  Date: 7/7/2016
-  Time: 4:49 PM
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

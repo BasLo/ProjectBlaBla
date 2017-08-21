@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add join table privilege to role" author="bas">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="jt_privilege_role"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="jt_privilege_role">
+            <column name="roleid" type="bigint(20)" >
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="FK_role_id_jt_privilege_role_roleid"
+                             references="role(id)"/>
+            </column>
+            <column name="privilegeid" type="bigint(20)" >
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="FK_privilege_id_jt_privilege_role_privilegeid"
+                             references="privilege(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
