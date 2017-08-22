@@ -1,17 +1,15 @@
 package com.company.web.config.tiles;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
-@Configuration
+//@Configuration
 public class TilesConfiguration {
     //TODO: разобраться с двойной инициализацией org.springframework.web.accept.ContentNegotiationStrategy
-    @Bean
+//    @Bean
     public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
         ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
 
@@ -35,7 +33,7 @@ public class TilesConfiguration {
     }
 */
 
-    @Bean
+//    @Bean
     public UrlBasedViewResolver urlBasedViewResolver() {
         UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
 
@@ -59,7 +57,7 @@ public class TilesConfiguration {
     }
 */
 
-    @Bean
+//    @Bean
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
 

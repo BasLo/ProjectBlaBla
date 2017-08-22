@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/resources/css/bootstrap/4.0.0/bootstrap.css">
+    <title th:text="#{label.pages.home.title}">home</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" th:text="#{label.pages.home.title}">home</a>
+            <a class="navbar-brand" href="/signUpView" th:text="#{label.pages.home.title}">Sign Up</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a th:href="@{/logout}" th:text="#{label.pages.logout}">logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 th:text="#{label.pages.home.message}">home</h1>
+</div>
+</body>
+
+</html>

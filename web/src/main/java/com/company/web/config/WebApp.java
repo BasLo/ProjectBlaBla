@@ -4,7 +4,6 @@ import com.company.domain.annotation.Production;
 import com.company.web.config.context.ContextConfiguration;
 import com.company.web.config.context.JpaConfig;
 import com.company.web.config.context.RepositoryDefinitions;
-import com.company.web.config.tiles.TilesConfiguration;
 import com.company.web.config.webmvc.WebMvcConfiguration;
 import com.company.web.config.websocket.WebSocketConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -22,16 +21,16 @@ public class WebApp
         return new Class<?>[]{
                 ContextConfiguration.class,
                 JpaConfig.class,
-                TilesConfiguration.class,
+//                TilesConfiguration.class,
                 RepositoryDefinitions.class,
+                WebMvcConfiguration.class,
+                WebSocketConfig.class
         };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
-                WebMvcConfiguration.class,
-                WebSocketConfig.class
         };
     }
 

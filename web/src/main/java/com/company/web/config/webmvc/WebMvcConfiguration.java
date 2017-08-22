@@ -6,22 +6,37 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-        "com.company.web.controller.**"
+        "com.company.web.controller"
 })
 @Import({SecurityConfig.class})
 public class WebMvcConfiguration
         extends WebMvcConfigurerAdapter {
+
+    private static final String CHARACTER_ENCODING = "UTF-8";
+    private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
+    private static final String VIEWS = "/WEB-INF/views/";
+
+    public WebMvcConfiguration(){
+        super();
+    }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -29,29 +44,68 @@ public class WebMvcConfiguration
     }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css*//**").addResourceLocations("/css/").setCachePeriod(31556926);
         registry.addResourceHandler("/img*//**").addResourceLocations("/img/").setCachePeriod(31556926);
         registry.addResourceHandler("/js*//**").addResourceLocations("/js/").setCachePeriod(31556926);
-        registry.addResourceHandler("/WEB-INF/views*//**").addResourceLocations("/views/");
-    }
-
-    @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-
-        return resolver;
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(final InterceptorRegistry registry) {
         final WebContentInterceptor webContentInterceptor = new WebContentInterceptor();
         webContentInterceptor.setCacheSeconds(0);
         registry.addInterceptor(webContentInterceptor);
+
+        final LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+
+        registry.addInterceptor(localeChangeInterceptor);
+    }
+
+    @Override
+    public void addViewControllers(final ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+
+        registry.addViewController("/").setViewName("forward:/home");
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/signUpView").setViewName("registration");
+    }
+
+    /*@Bean
+    public ServletContextTemplateResolver getInternalResourceViewResolver() {
+//        final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
+        resolver.setPrefix("/WEB-INF/templates/");
+        resolver.setSuffix(".html");
+        return resolver;
+    }*/
+
+    @Bean
+    public ITemplateResolver templateResolver() {
+        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+        resolver.setPrefix(VIEWS);
+        resolver.setSuffix(".html");
+        resolver.setTemplateMode(TemplateMode.HTML);
+        resolver.setCharacterEncoding(CHARACTER_ENCODING);
+        resolver.setCacheable(false);
+        return resolver;
+    }
+
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addDialect(new SpringSecurityDialect());
+        templateEngine.addDialect(new Java8TimeDialect());
+        return templateEngine;
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+        ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
+        thymeleafViewResolver.setTemplateEngine(templateEngine());
+        thymeleafViewResolver.setCharacterEncoding(CHARACTER_ENCODING);
+        return thymeleafViewResolver;
     }
 
     @Bean

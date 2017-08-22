@@ -24,16 +24,9 @@ public class ClientSignUpController {
 
     private ClientRegistrationService registrationService;
 
-    @RequestMapping(value = "/signUpView", method = RequestMethod.GET)
-    public ModelAndView signUpView(ModelAndView modelAndView){
-        modelAndView.setViewName("defaultTemplate");
-        modelAndView.addObject("content", "/WEB-INF/template/body/sign_up_content.jsp");
-        return  modelAndView;
-    }
-
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public ModelAndView singUp(@Valid @NotNull final UserDto userDto,
-                               BindingResult bindingResult, ModelAndView modelAndView, WebRequest request){
+    public String singUp(@Valid @NotNull final UserDto userDto,
+                               BindingResult bindingResult, WebRequest request){
         LOGGER.debug("Registering user account with information: {}", userDto);
 
         if (!bindingResult.hasErrors()) {
@@ -41,7 +34,7 @@ public class ClientSignUpController {
         }else {
             //TODO: something wrong!
         }
-        return modelAndView;
+        return "login                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ";
     }
 
     @RequestMapping(value = "/mailRegistrationConfirm", method = RequestMethod.GET)
