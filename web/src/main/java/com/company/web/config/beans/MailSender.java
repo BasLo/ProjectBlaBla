@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Properties;
 
 @Component
-public class Spring {
+public class MailSender {
 
     private Environment environment;
 

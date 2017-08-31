@@ -31,7 +31,6 @@ public class WebMvcConfiguration
         extends WebMvcConfigurerAdapter {
 
     private static final String CHARACTER_ENCODING = "UTF-8";
-    private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
     private static final String VIEWS = "/WEB-INF/views/";
 
     public WebMvcConfiguration(){
@@ -69,16 +68,8 @@ public class WebMvcConfiguration
         registry.addViewController("/").setViewName("forward:/home");
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/signUpView").setViewName("registration");
+        registry.addViewController("/ws").setViewName("websoket");
     }
-
-    /*@Bean
-    public ServletContextTemplateResolver getInternalResourceViewResolver() {
-//        final InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
-        resolver.setPrefix("/WEB-INF/templates/");
-        resolver.setSuffix(".html");
-        return resolver;
-    }*/
 
     @Bean
     public ITemplateResolver templateResolver() {
