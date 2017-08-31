@@ -120,7 +120,6 @@ dist/
 nbdist/
 nbactions.xml
 .nb-gradle/
-common/src/main/resources/
 common/src/test/
 common/target/
 db/src/test/
@@ -132,9 +131,10 @@ restful/src/
 restful/target/
 test/src/main/
 test/target/
-web/src/main/resources/
 web/src/test/
 web/target/
 target/ProjectName-1.0-SNAPSHOT/WEB-INF/classes/com/db/
 target/ProjectName-1.0-SNAPSHOT/WEB-INF/classes/com/web/
 target/ProjectName-1.0-SNAPSHOT/WEB-INF/classes/com/website/
+common/src/main/java/com/company/common/config/
+tests/target/
