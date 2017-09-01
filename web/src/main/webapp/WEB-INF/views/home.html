@@ -1,8 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/resources/css/bootstrap/4.0.0/bootstrap.css}">
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/4.0.0/bootstrap.css}"/>
+    <link rel="script" th:href="@{/js/jquery-3.0.0.min.js}"/>
     <title>home</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">home</a>
-            <a class="navbar-brand" href="/signUpView">Sign Up</a>
+            <a class="navbar-brand" th:href="@{/signUpView}">Sign Up</a>
         </div>
 
         <ul class="nav navbar-nav navbar-right">

@@ -1,9 +1,11 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script type="text/javascript" th:href="@{/resourses111/js/sockjs.min.js}"></script>
-    <script type="text/javascript" th:href="@{/resources/js/stomp.min.js}"></script>
+    <meta charset="UTF-8" />
+
+    <script type="text/javascript" th:src="@{/js/sockjs.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sockjs-0.3.4.js}"></script>
+    <script type="text/javascript" th:src="@{/js/stomp.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.0.0.min.js}"></script>
 
     <script type="text/javascript">
         var stompClient = null;
@@ -16,12 +18,12 @@
         }
 
         function connect() {
-            var socket = new SockJS("<c:url value='/hello'/>");
+            var socket = new SockJS("/hello/");
             stompClient = Stomp.over(socket);
             stompClient.connect({}, function (frame) {
                 setConnected(true);
                 console.log('Connected: ' + frame);
-                stompClient.subscribe("<c:url value='/topic/answer'/>", function (greeting) {
+                stompClient.subscribe('/topic/answer', function (greeting) {
                     showGreeting(JSON.parse(greeting.body).content);
                 });
             });
@@ -37,7 +39,7 @@
 
         function sendName() {
             var name = document.getElementById('name').value;
-            stompClient.send("<c:url value='/hello'/>", {}, JSON.stringify({'name': name}));
+            stompClient.send('/hello', {}, JSON.stringify({'name': name}));
         }
 
         function showGreeting(message) {
@@ -48,24 +50,29 @@
             response.appendChild(p);
         }
     </script>
-</head>
-<body>
 
-<noscript>
-    <h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-        enabled. Please enable
-        Javascript and reload this page!</h2></noscript>
-<div>
+</head>
+
+    <body>
+
+    <noscript>
+        <h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+            enabled. Please enable
+            Javascript and reload this page!</h2>
+    </noscript>
+
     <div>
-        <button id="connect" onclick="connect();">Connect</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+        <div>
+            <button id="connect" onclick="connect();">Connect</button>
+            <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+        </div>
+        <div id="conversationDiv">
+            <label>What is your name?</label>
+            <input id="name"/>
+            <button id="sendName" onclick="sendName();">Send</button>
+            <p id="response"></p>
+        </div>
     </div>
-    <div id="conversationDiv">
-        <label>What is your name?</label>
-        <input id="name"/>
-        <button id="sendName" onclick="sendName();">Send</button>
-        <p id="response"></p>
-    </div>
-</div>
-</body>
+
+    </body>
 </html>

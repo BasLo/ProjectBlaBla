@@ -44,9 +44,8 @@ public class WebMvcConfiguration
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css*//**").addResourceLocations("/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img*//**").addResourceLocations("/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js*//**").addResourceLocations("/js/").setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
     }
 
     @Override
