@@ -35,16 +35,6 @@ public class JpaConfig
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        Class<?> joinTable = null;
-        try {
-            joinTable = Thread.currentThread().getContextClassLoader()
-                    .loadClass(JoinTable.class.getName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(Arrays.asList(joinTable.getDeclaredMethods()));
-
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
         entityManagerFactoryBean.setDataSource(dataSource());
